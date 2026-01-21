@@ -337,41 +337,6 @@ Field Service, Service, Customer Service, Customer Support, Technical Support, O
 - **Medium**: Score 50-74 - Secondary targets for follow-up
 - **Low**: Score < 50 - Lower priority or out of scope
 
-## Troubleshooting
-
-### Common Issues
-
-**Problem: "GEMINI_API_KEY not set"**
-- **Solution**: Set the `GEMINI_API_KEY` environment variable or add it to a `.env` file
-- The system will fall back to rule-based validation, but AI-powered scoring won't be available
-
-**Problem: "No data scraped"**
-- **Solution**: 
-  - Check if the URL is accessible
-  - Some websites may require JavaScript rendering (Selenium is used automatically)
-  - Try using `--verbose` to see detailed scraping logs
-  - Consider providing a PDF attendee list with `--attendee-pdf`
-
-**Problem: "PDF parsing failed"**
-- **Solution**:
-  - For text-based PDFs: Ensure `pdfplumber` is installed: `pip install pdfplumber`
-  - For scanned/image-based PDFs: Set `MISTRAL_API_KEY` for Mistral AI OCR support
-  - Check that the PDF file is accessible and not corrupted
-  - Try using `--ocr-text` with pre-extracted text instead
-  - Verify your Mistral API key is valid and has sufficient quota
-
-**Problem: "Rate limit exceeded"**
-- **Solution**: 
-  - The system includes automatic retries and delays
-  - Adjust `SCRAPER_CONFIG["request_delay"]` in `config.py` to slow down requests
-  - Check your Gemini API quota
-
-**Problem: Import errors**
-- **Solution**: 
-  - Ensure virtual environment is activated
-  - Reinstall dependencies: `pip install -r requirements.txt`
-  - Check Python version: `python --version` (requires 3.8+)
-
 ### Debug Mode
 
 Use `--verbose` flag to see:
@@ -381,53 +346,6 @@ Use `--verbose` flag to see:
 - Quality review decisions
 
 ## Project Structure
-
-```
-ascendo/
-├── agents/
-│   ├── base_agent.py           # Abstract base class for all agents
-│   ├── scraper_agent.py        # Web scraping and PDF parsing
-│   ├── enricher_agent.py       # Data enrichment (industry, size)
-│   ├── icp_validator_agent.py  # ICP scoring and validation
-│   ├── quality_agent.py        # Quality review and disputes
-│   └── orchestrator_agent.py   # Pipeline coordination
-├── communication/
-│   ├── message_bus.py          # Agent messaging system
-│   └── context.py              # Shared state management
-├── models/
-│   └── schemas.py              # Pydantic data models
-├── llm/
-│   └── gemini_client.py        # Gemini API wrapper
-├── main.py                     # CLI entry point
-├── config.py                   # Configuration settings
-├── requirements.txt            # Python dependencies
-└── README.md                   # This file
-```
-
-## Extending the System
-
-### Adding a New Agent
-
-1. **Create agent file** in `agents/` directory
-   ```python
-   from agents.base_agent import BaseAgent
-   
-   class MyNewAgent(BaseAgent):
-       def process(self, context):
-           # Your logic here
-           return context
-       
-       def handle_message(self, message):
-           # Handle incoming messages
-           pass
-   ```
-
-2. **Register with OrchestratorAgent** in `orchestrator_agent.py`
-   ```python
-   self.my_agent = MyNewAgent(self.message_bus, self.gemini_client)
-   ```
-
-3. **Add to pipeline** in `orchestrator.process()`
 
 ### Example Agent Ideas
 
