@@ -182,36 +182,6 @@ The system integrates with Mistral AI for advanced PDF OCR (Optical Character Re
    MISTRAL_API_KEY=your-mistral-api-key
    ```
 
-### When to Use Mistral OCR
-
-- **Scanned PDFs**: Documents that were scanned from paper
-- **Image-based PDFs**: PDFs containing images of text rather than selectable text
-- **Complex Layouts**: Tables with complex formatting that standard parsers struggle with
-- **Low Quality Scans**: Documents with poor image quality that need advanced OCR
-
-### Mistral vs pdfplumber
-
-| Feature | Mistral OCR | pdfplumber |
-|---------|------------|------------|
-| Scanned PDFs | Yes | No |
-| Image-based PDFs | Yes | No |
-| Text-based PDFs | Yes | Yes |
-| Complex Tables | Excellent | Good |
-| Cost | API usage | Free |
-| Speed | Slower (API call) | Faster (local) |
-
-**Recommendation**: Use Mistral OCR for scanned or image-based PDFs. For text-based PDFs, pdfplumber is faster and free.
-
-### Using Pre-Extracted OCR Text
-
-If you've already extracted OCR text from a PDF (using Mistral or another tool), you can skip the OCR step and provide the text directly:
-
-```bash
-python main.py run --url "https://conference.com" --ocr-text ocr_output.txt
-```
-
-This is faster and avoids API costs if you've already processed the PDF elsewhere.
-
 ## Usage
 
 ### Basic Usage
