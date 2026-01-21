@@ -503,18 +503,6 @@ Understand which companies are active in your target market by analyzing confere
 ### 5. Sales Team Prioritization
 Generate prioritized lists for sales teams, focusing on High-fit companies first.
 
-## License
-
-[Add your license information here]
-
-## Contributing
-
-[Add contribution guidelines here]
-
-## Support
-
-For issues, questions, or feature requests, please [open an issue](link-to-issues) or contact [your contact information].
-
 ---
 
 Example agent ideas:
